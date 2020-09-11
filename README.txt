@@ -27,6 +27,10 @@ Overview
     working implementation of reflective dll injection utilising Windows'
     portable executable api.
 
+    Note that while it may look like normal dll injection, dll injection via
+    the portable executable API is by definition reflective, as it uses a
+    custom loading method.
+
 Usage
 
     Taking a look at `src/main.c`, you can see that the bytes of an executable
@@ -46,15 +50,15 @@ Usage
 
 	    // Create portable executable
 	    int error_code = 0;
-	    exe_handle_t handle = exe_handle_new((void*)buf, 1, &error_code);
+	    exe_handle_t handle = exe_handle_new((void*)buf, &error_code);
 	
 	    // Call the entry-point of the portable executable.
-	    exe_handle_main(handle);
-
-	    // Free portable executable and bytes of physical executable from
-        // memory.
+	    exe_handle_dll_inject(handle);
+	
 	    exe_handle_free(handle);
 	    free(buf);
+
+	    return error_code;
     }
 
     ...

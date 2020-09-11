@@ -14,8 +14,9 @@ typedef void** exe_handle_t;
 // instance, or NULL.
 exe_handle_t exe_handle_new(void* exe_buf, int* error);
 
-// Calls the main function of the memory module. Returns true if successful.
-int exe_handle_main(exe_handle_t exe);
+// Calls the main function of the memory module via dll injection, and returns
+// true if successful.
+int exe_handle_dll_inject(exe_handle_t exe_handle);
 
 // Gets the process address of the specific function in the memory module, and
 // returns the address of the function, or NULL.

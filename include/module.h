@@ -39,7 +39,6 @@ struct exe {
 	unsigned long size_of_image;  // `exe` size
 	unsigned long crc;            // `exe` crc32
 	struct api_table* api;        // function table
-	int call_entry;               // call exe entry
 	int load_ok;                  // `exe` is loaded
 	enum error_code error_code;   // last error code
 };

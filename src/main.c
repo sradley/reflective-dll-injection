@@ -15,13 +15,11 @@ int main()
 
 	// Create portable executable
 	int error_code = 0;
-	exe_handle_t handle = exe_handle_new((void*)buf, 1, &error_code);
+	exe_handle_t handle = exe_handle_new((void*)buf, &error_code);
 	
 	// Call the entry-point of the portable executable.
-	exe_handle_main(handle);
-
-	// Free portable executable and bytes of physical executable from
-	// memory.
+	exe_handle_dll_inject(handle);
+	
 	exe_handle_free(handle);
 	free(buf);
 

@@ -78,9 +78,6 @@ int exe_init(struct exe* pe, void* exe_buf)
 		return 0;
 	}
 
-	if (!exe_execute_tls_callback(pe))
-		return 0;
-
 	return 1;
 }
 
@@ -88,9 +85,6 @@ void exe_free(struct exe* pe)
 {
 	if (pe != NULL) {
 		pe->error_code = EXE_OK;
-		if (pe->call_entry)
-			exe_call_entry(pe, DLL_PROCESS_DETACH);
-
 		exe_unmap(pe);
 	}
 }
